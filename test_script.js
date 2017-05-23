@@ -28,8 +28,8 @@ client.connect((err) => {
 
     let resultStrings = result.rows.map(function turnRowIntoString(row) {
       let birthdate= new Date(row.birthdate);
-return '- ' + row.id + ": " + row.first_name + ' ' + row.last_name + ", born '" + birthdate.getFullYear() + '-' + padTwoDigitNumber(birthdate.getMonth() + 1) + '-' + padTwoDigitNumber(birthdate.getDate()) + "'";    });
-    console.log(resultStrings.join('\n'));
-    client.end();
+      return '- ' + row.id + ": " + row.first_name + ' ' + row.last_name + ", born '" + birthdate.getFullYear() + '-' + padTwoDigitNumber(birthdate.getMonth() + 1) + '-' + padTwoDigitNumber(birthdate.getDate()) + "'";    });
+      console.log(resultStrings.join('\n'));
+      client.end();
   });
 });
