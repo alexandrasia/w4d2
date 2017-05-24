@@ -1,11 +1,11 @@
 const pg = require("pg");
-const settings = require("./settings"); // settings.json
+const settings = require("./settings");
 
 const client = new pg.Client({
   user     : settings.user,
   password : settings.password,
   database : settings.database,
-  host     : settings.hostname,
+  hostname : settings.hostname,
   port     : settings.port,
   ssl      : settings.ssl
 });
@@ -27,9 +27,10 @@ client.connect((err) => {
     console.log("Found", result.rows.length, "person(s) by the name " + input + ":");
 
     let resultStrings = result.rows.map(function turnRowIntoString(row) {
-      let birthdate= new Date(row.birthdate);
-      return '- ' + row.id + ": " + row.first_name + ' ' + row.last_name + ", born '" + birthdate.getFullYear() + '-' + padTwoDigitNumber(birthdate.getMonth() + 1) + '-' + padTwoDigitNumber(birthdate.getDate()) + "'";    });
-      console.log(resultStrings.join('\n'));
-      client.end();
+      let birthdate = new Date(row.birthdate);
+      return '- ' + row.id + ": " + row.first_name + ' ' + row.last_name + ", born '" + birthdate.getFullYear() + '-' + padTwoDigitNumber(birthdate.getMonth() + 1) + '-' + padTwoDigitNumber(birthdate.getDate()) + "'";
+    });
+    console.log(resultStrings.join('\n'));
+    client.end();
   });
 });
